@@ -29,15 +29,23 @@ TEST(CalcTest, PressPlus)
     FAIL() << "작성 중입니다.";
 }
 
+// 2. TestCase를 구성하는 방법 - 3A
+// 1) Arrange: 테스트 대상 코드를 초기화하고, 필요한 경우 설정하고 준비합니다.
+// 2) Act: 테스트 대상 코드에서 작용을 가합니다.
+// 3) Assert: 기대하는 바를 단언합니다.
+
 TEST(CalcTest, PressPlus2)
 {
+    // Arrange
     Calc* calc = new Calc;
 
+    // Act
     calc->Enter(2);
     calc->PressPlus();
     calc->Enter(2);
     calc->PressEquals();
 
+    // Assert
     if (calc->Display() == 4) {
         SUCCEED();
     } else {
