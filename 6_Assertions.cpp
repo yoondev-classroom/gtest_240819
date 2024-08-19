@@ -1,6 +1,8 @@
 // 6_Assertions.cpp
 #include <gtest/gtest.h>
 
+// * Google Test의 단언문은 매크로를 통해서 제공되고 있습니다.
+
 int foo() { return 420; }
 int goo() { return 1000; }
 
@@ -96,7 +98,7 @@ TEST(SampleTest3, Sample1)
     // EXPECT_EQ(a, b);
 
     EXPECT_DOUBLE_EQ(a, b);
-    EXPECT_NEAR(a, b, 0.0000000000);
+    EXPECT_NEAR(a, b, 0.0000000001);
 }
 
 // * 테스트 커버리지
@@ -113,12 +115,18 @@ void OpenFile(const std::string& filename)
 }
 
 // 5. 예외 검증 단언문을 제공하고 있습니다.
+//  - EXPECT_THROW: 기대한 예외가 발생하는지 여부를 단언합니다.
+//  - EXPECT_ANY_THROW: 예외 발생하는지 여부를 단언합니다.
+//  - EXPECT_NO_THROW: 예외가 발생하지 않음을 단언합니다.
 TEST(SampleTest4, OpenFile2)
 {
     std::string emptyFilename = "";
 
     EXPECT_THROW(OpenFile(emptyFilename), std::invalid_argument)
         << "빈 파일을 전달하였을 때";
+    EXPECT_ANY_THROW(OpenFile(emptyFilename));
+
+    EXPECT_NO_THROW(OpenFile(emptyFilename));
 }
 
 // 잘못된 파일이 전달되었을 때, invalid_argument 예외가 발생하는지 여부를 검증하고 싶습니다.
