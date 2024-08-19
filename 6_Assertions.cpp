@@ -38,10 +38,28 @@ TEST(SampleTest, Sample_ASSERT)
 //  EQ/LE/LT/GE/GT/TRUE/FALSE ..
 //  - 단언문이 실패할 경우, 테스트의 결과는 실패이지만, 이후의 코드를 계속 수행합니다.
 // "죽은 단언문" 문제가 발생하지 않습니다.
-
 TEST(SampleTest, Sample_EXPECT)
 {
     // ...
     EXPECT_EQ(foo(), 42);
     EXPECT_EQ(goo(), 100);
+}
+
+class User {
+    std::string name = "Tom";
+
+public:
+    std::string GetName() const { return name; }
+};
+
+// User* GetUser() { return new User; }
+User* GetUser() { return nullptr; }
+
+TEST(UserTest, GetName)
+{
+    User* user = GetUser();
+
+    // EXPECT_NE(user, nullptr);
+    ASSERT_NE(user, nullptr); // 왜 ASSERT로 작성되어야 하는지를 이해해야 합니다.
+    EXPECT_EQ(user->GetName(), "Tom"); // !!
 }
