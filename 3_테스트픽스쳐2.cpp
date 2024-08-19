@@ -22,7 +22,9 @@ public:
 
 // 명시적인 테스트 스위트 클래스
 class CalcTest : public testing::Test {
-public:
+protected:
+    // 테스트 케이스는 자식 클래스이기 때문에, private은 접근이 불가능합니다.
+
     Calc* CreateCalc() { return new Calc { 0 }; }
 };
 
