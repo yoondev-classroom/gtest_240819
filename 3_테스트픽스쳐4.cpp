@@ -33,6 +33,7 @@ TEST_F(ImageProcessorTest, foo) { }
 // => 각 테스트 케이스마다 새로운 픽스쳐 객체를 생성하고 파괴하는 형태로 테스트케이스가 수행됩니다.
 
 // Test Runner
+//  -- 스위트 픽스쳐 설치 --
 // - ImageProcessorTest 객체 생성
 // - ImageProcessorTest.ResizeImage
 //   ImageProcessorTest.SetUp()
@@ -46,3 +47,4 @@ TEST_F(ImageProcessorTest, foo) { }
 //   ...
 //   ImageProcessorTest.TearDown()
 // - ImageProcessorTest 객체 파괴
+//  -- 스위트 픽스쳐 해체 --
