@@ -71,6 +71,7 @@ class TerminalTest : public testing::Test {
 protected:
     static Terminal* ts;
 
+    // 테스트 스위트 픽스쳐
     static void SetUpTestSuite()
     {
         std::cout << "SetUpTestSuite()" << std::endl;
@@ -85,6 +86,7 @@ protected:
         delete ts;
     }
 
+    // 테스트(테스트 케이스) 픽스쳐
     void SetUp() override
     {
         // Terminal* ts = new Terminal;
