@@ -15,3 +15,8 @@ TEST(ImageProcessorTest, DISABLED_ResizeImage)
     // 작성중입니다.
     FAIL() << "작성중입니다.";
 }
+
+class DISABLED_SampleTest : public testing::Test { };
+TEST_F(DISABLED_SampleTest, foo) { }
+TEST_F(DISABLED_SampleTest, goo) { }
+TEST_F(DISABLED_SampleTest, hoo) { }
