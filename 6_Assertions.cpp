@@ -35,7 +35,7 @@ TEST(SampleTest, Sample_ASSERT)
 
 // 2. EXPECT_ 단언문
 //  : Google Test 고유의 기능입니다.
-//  EQ/LE/LT/GE/GT/TRUE/FALSE ..
+//  EQ/NE/LE/LT/GE/GT/TRUE/FALSE ..
 //  - 단언문이 실패할 경우, 테스트의 결과는 실패이지만, 이후의 코드를 계속 수행합니다.
 // "죽은 단언문" 문제가 발생하지 않습니다.
 TEST(SampleTest, Sample_EXPECT)
@@ -62,4 +62,23 @@ TEST(UserTest, GetName)
     // EXPECT_NE(user, nullptr);
     ASSERT_NE(user, nullptr); // 왜 ASSERT로 작성되어야 하는지를 이해해야 합니다.
     EXPECT_EQ(user->GetName(), "Tom"); // !!
+}
+
+// 3. C 문자열 비교 단언문
+//  C 문자열: '\0' 문자로 종료되는 char 배열
+//   - EXPECT_STREQ/STRNE
+//   - EXPECT_STRCASEQ/STRCASENE
+TEST(SampleTest2, Sample1)
+{
+    std::string s1 = "hello";
+    std::string s2 = "hello";
+
+    // ...
+    EXPECT_EQ(s1, s2); // s1 == s2
+
+    const char* s3 = "HELLO";
+    const char* s4 = s2.c_str();
+    // EXPECT_EQ(s3, s4);
+    // EXPECT_STREQ(s3, s4); // C 문자열
+    EXPECT_STRCASEEQ(s3, s4);
 }
