@@ -48,3 +48,13 @@ TEST(ImageProcessorTest, hoo) { } // ImageProcessorTest.hoo
 // 테스트의 성격에 따라서, 접두를 다르게 표현하였습니다.
 // A_foo
 // B_foo
+
+// 3. 반복 / 무작위
+// => 모든 테스트는 몇번을 수행하든, 순서에 상관없이 항상 동일한 결과가 나와야 합니다.
+//   : "신뢰성"
+
+// $ ./a.out --gtest_shuffle --gtest_repeat=10
+
+TEST(SampleTest, foo)
+{
+}
