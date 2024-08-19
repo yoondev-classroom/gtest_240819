@@ -53,8 +53,14 @@ TEST(ImageProcessorTest, hoo) { } // ImageProcessorTest.hoo
 // => 모든 테스트는 몇번을 수행하든, 순서에 상관없이 항상 동일한 결과가 나와야 합니다.
 //   : "신뢰성"
 
-// $ ./a.out --gtest_shuffle --gtest_repeat=10
+// $ ./a.out --gtest_shuffle --gtest_repeat=10 --gtest_break_on_failure
+//  : --gtest_break_on_failure
+//  - 테스트가 실패할 경우, 강제적으로 프로세스를 종료 합니다.
 
+int n = 0;
 TEST(SampleTest, foo)
 {
+    if (++n == 5) {
+        FAIL();
+    }
 }
