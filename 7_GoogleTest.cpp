@@ -89,3 +89,11 @@ TEST(SampleTest, foo)
 // => 테스트의 결과를 JSON 형식으로 export 할 수 있습니다.
 //  : Google Test 고유의 기능입니다. (1.10 이후로 지원합니다.)
 //  $ ./a.out --gtest_output=json
+
+// 5. 테스트 결과 포맷(xml/json)에 추가적인 정보도 기록할 수 있습니다.
+TEST(ImageTest, ResizeImage)
+{
+    // cpu / mem
+    RecordProperty("cpu", "1.4");
+    RecordProperty("mem", "2312322");
+}
