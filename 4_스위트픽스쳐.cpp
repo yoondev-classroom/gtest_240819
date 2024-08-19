@@ -72,14 +72,14 @@ protected:
     static Terminal* ts;
 
     // 테스트 스위트 픽스쳐
-    static void SetUpTestSuite()
+    static void SetUpTestSuite() // 1.10 이전 - SetUpTestCase
     {
         std::cout << "SetUpTestSuite()" << std::endl;
         Terminal* ts = new Terminal;
         ts->Connect();
     }
 
-    static void TearDownTestSuite()
+    static void TearDownTestSuite() // 1.10 이전 - TearDownTestCase
     {
         std::cout << "TearDownTestSuite()" << std::endl;
         ts->Disconnect();
