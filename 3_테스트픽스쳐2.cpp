@@ -13,6 +13,7 @@ public:
 
 #include <gtest/gtest.h>
 
+#if 0
 #define SPEC(msg) printf("[SPEC] %s\n", msg)
 
 // 2. Test Fixture를 설치하는 방법
@@ -46,3 +47,16 @@ TEST(CalcTest, PressMinus)
 
     ASSERT_EQ(calc->Display(), 0) << "10 - 10 하였을 때";
 }
+#endif
+
+//        ::testing::Test
+//              |
+//    -----------------------------------
+//    |                                  |
+//  CalcTest_PressPlus_Test      CalcTest_PressMinus_Test
+
+TEST(CalcTest, PressPlus) { }
+// class CalcTest_PressPlus_Test : public ::testing::Test
+
+TEST(CalcTest, PressMinus) { }
+// class CalcTest_PressMinus_Test : public ::testing::Test
