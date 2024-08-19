@@ -28,3 +28,15 @@ TEST(CalcTest, PressPlus_TwoPlusTwo_DisplaysFour)
     // Assert
     ASSERT_EQ(calc->Display(), 4) << "2 + 2 하였을 때";
 }
+
+TEST(CalcTest, PressMinus)
+{
+    Calc* calc = new Calc;
+
+    calc->Enter(10);
+    calc->PressMinus();
+    calc->Enter(10);
+    calc->PressEquals();
+
+    ASSERT_EQ(calc->Display(), 0) << "10 - 10 하였을 때";
+}
