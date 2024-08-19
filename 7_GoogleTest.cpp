@@ -27,7 +27,16 @@ TEST_F(DISABLED_SampleTest, hoo) { }
 // => 원하는 테스트를 선택적으로 수행할 수 있습니다.
 //  : 테스트의 이름을 잘 구성하는 것이 중요합니다.
 // $ ./a.out --gtest_filter=ImageTest.goo
+
+//  - 여러개의 테스트를 :을 통해 나열할 수 있습니다.
 // $ ./a.out --gtest_filter=ImageTest.goo:ImageProcessorTest.goo
+
+//  - 와일드 카드(*)을 지원합니다.
+// $ ./a.out --gtest_filter=*.goo
+// $ ./a.out --gtest_filter=Image*.foo
+
+//  - 앞의 조건에서 제외할 수 있는 기능도 제공합니다.
+// $ ./a.out --gtest_filter=Image*.foo:-ImageProcessorTest.foo
 
 TEST(ImageTest, foo) { } // ImageTest.foo
 TEST(ImageTest, goo) { } // ImageTest.goo
