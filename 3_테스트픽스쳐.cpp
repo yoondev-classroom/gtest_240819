@@ -16,9 +16,9 @@ public:
 #define SPEC(msg) printf("[SPEC] %s\n", msg)
 
 // 1. Test Fixture
-// 정의: xUnit Test Framework에서 SUT를 실행하기 위해 준비해야 하는 모든 것을
+// 정의: xUnit Test Framework에서 SUT를 실행하기 위해 준비해야 하는 모든 것(사전조건, 상태)을
 //     테스트 픽스쳐라고 합니다.
-//     테스트 픽스쳐를 구성하는 모든 코드의 로직 부분을 "픽스쳐 설치"라고 합니다.
+//     테스트 픽스쳐를 구성하는 모든 코드의 로직 부분을 "픽스쳐 설치(Set up)"라고 합니다.
 
 // 2. Test Fixture를 설치하는 방법
 //  1) Inline Fixture Set up

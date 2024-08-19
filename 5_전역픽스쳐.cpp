@@ -45,12 +45,14 @@ public:
 //      - main을 직접 정의한 경우
 //      : 정적 라이브러리에서 main을 제거해주어야 합니다.
 //        이전 컴파일러에서는 링크 오류가 발생할 수 있습니다.
-#if 1
+#if 0
 int main(int argc, char** argv)
 {
     testing::InitGoogleTest(&argc, argv);
 
     testing::AddGlobalTestEnvironment(new MyEnvironment);
+    // new를 통해서 생성해야 합니다.
+
     testing::AddGlobalTestEnvironment(new MyEnvironment2);
 
     return RUN_ALL_TESTS();

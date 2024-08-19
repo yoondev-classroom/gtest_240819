@@ -69,7 +69,7 @@ TEST(UserTest, GetName)
 // 3. C 문자열 비교 단언문
 //  C 문자열: '\0' 문자로 종료되는 char 배열
 //   - EXPECT_STREQ/STRNE
-//   - EXPECT_STRCASEQ/STRCASENE
+//   - EXPECT_STRCASEQ/STRCASENE : 대소문자 무시
 TEST(SampleTest2, Sample1)
 {
     std::string s1 = "hello";
