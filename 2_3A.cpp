@@ -28,3 +28,19 @@ TEST(CalcTest, PressPlus)
     // FAIL();
     FAIL() << "작성 중입니다.";
 }
+
+TEST(CalcTest, PressPlus2)
+{
+    Calc* calc = new Calc;
+
+    calc->Enter(2);
+    calc->PressPlus();
+    calc->Enter(2);
+    calc->PressEquals();
+
+    if (calc->Display() == 4) {
+        SUCCEED();
+    } else {
+        FAIL();
+    }
+}
