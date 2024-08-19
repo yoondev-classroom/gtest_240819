@@ -30,9 +30,14 @@ TEST(CalcTest, PressPlus)
 }
 
 // 2. TestCase를 구성하는 방법 - 3A
-// 1) Arrange: 테스트 대상 코드를 초기화하고, 필요한 경우 설정하고 준비합니다.
-// 2) Act: 테스트 대상 코드에서 작용을 가합니다.
-// 3) Assert: 기대하는 바를 단언합니다.
+// 1) Arrange/Given: 테스트 대상 코드를 초기화하고, 필요한 경우 설정하고 준비합니다.
+// 2) Act/When: 테스트 대상 코드에서 작용을 가합니다.
+// 3) Assert/Then: 기대하는 바를 단언합니다.
+
+// => TDD(Test Driven Development) / BDD(Behavior Driven Development)
+//  1. 가독성
+//  => 자연어와 가깝게 테스트 코드를 표현하는 것을 중요하게 생각합니다.
+//  2. 행위 검증
 
 // 3. 좋은 단위 테스트
 //  1) 가독성
@@ -45,6 +50,7 @@ TEST(CalcTest, PressPlus)
 //   - 테스트 코드에 오류 가능성이 있는 제어 구문(조건문, 반복문, 예외 처리)의 발생을 최소화해야 합니다.
 
 //  3) 신뢰성
+//   - 테스트 결과를 신뢰할 수 있는가?
 
 #define SPEC(msg) printf("[SPEC] %s\n", msg)
 
