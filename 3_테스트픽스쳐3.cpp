@@ -20,12 +20,15 @@ public:
 // => xUnit Test Framework이 제공하는 기능입니다.
 // 방법: 여러 테스트케이스에서 같은 테스트 픽스쳐 설치에 코드를 암묵적으로 호출되는 약속된 함수를 통해서 처리합니다.
 //    - 반드시 명시적인 테스트 스위트 클래스를 제공해야 합니다.
+//  장점: 테스트 코드 중복을 제거하고, 불필요한 준비 과정을 테스트 케이스 안에서 제거할 수 있습니다.
+//  단점: 픽스쳐 설치의 과정이 테스트 케이스 외부에 존재하기 때문에,
+//       테스트케이스만으로 테스트 코드를 분석하기 어려울 수 있습니다.
 
 class CalcTest : public testing::Test {
 protected:
     Calc* calc;
 
-    void SetUp()
+    void SetUp() override
     {
         std::cout << "SetUp()" << std::endl;
         calc = new Calc;
