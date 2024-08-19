@@ -16,9 +16,20 @@ public:
 #define SPEC(msg) printf("[SPEC] %s\n", msg)
 
 // 2. Test Fixture를 설치하는 방법
-// 3)
+// 3) Implicit Set up(암묵적 설치)
+// => xUnit Test Framework이 제공하는 기능입니다.
+// 방법: 여러 테스트케이스에서 같은 테스트 픽스쳐 설치에 코드를 암묵적으로 호출되는 약속된 함수를 통해서 처리합니다.
+//    - 반드시 명시적인 테스트 스위트 클래스를 제공해야 합니다.
 
-TEST(CalcTest, PressPlus_TwoPlusTwo_DisplaysFour)
+class CalcTest : public testing::Test {
+protected:
+    void SetUp()
+    {
+        std::cout << "SetUp()" << std::endl;
+    }
+};
+
+TEST_F(CalcTest, PressPlus_TwoPlusTwo_DisplaysFour)
 {
     SPEC("2 더하기 2를 하였을 때, Display의 결과가 4 인지를 검증합니다.");
     // Arrange
@@ -34,7 +45,7 @@ TEST(CalcTest, PressPlus_TwoPlusTwo_DisplaysFour)
     ASSERT_EQ(calc->Display(), 4) << "2 + 2 하였을 때";
 }
 
-TEST(CalcTest, PressMinus)
+TEST_F(CalcTest, PressMinus)
 {
     Calc* calc = new Calc;
 
