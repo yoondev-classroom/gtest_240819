@@ -23,18 +23,18 @@ public:
 
 class CalcTest : public testing::Test {
 protected:
+    Calc* calc;
+
     void SetUp()
     {
         std::cout << "SetUp()" << std::endl;
+        calc = new Calc;
     }
 };
 
 TEST_F(CalcTest, PressPlus_TwoPlusTwo_DisplaysFour)
 {
     SPEC("2 더하기 2를 하였을 때, Display의 결과가 4 인지를 검증합니다.");
-    // Arrange
-    Calc* calc = new Calc;
-
     // Act
     calc->Enter(2);
     calc->PressPlus();
@@ -47,8 +47,6 @@ TEST_F(CalcTest, PressPlus_TwoPlusTwo_DisplaysFour)
 
 TEST_F(CalcTest, PressMinus)
 {
-    Calc* calc = new Calc;
-
     calc->Enter(10);
     calc->PressMinus();
     calc->Enter(10);
