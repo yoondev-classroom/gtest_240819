@@ -27,6 +27,9 @@ public:
 //  단점: 픽스쳐 설치의 과정이 테스트 케이스 외부에 존재하기 때문에,
 //       테스트케이스만으로 테스트 코드를 분석하기 어려울 수 있습니다.
 
+// 3. Test Suite
+// => 동일한 테스트 픽스쳐를 공유하는 테스트 케이스의 집합
+
 class CalcTest : public testing::Test {
 protected:
     Calc* calc;
