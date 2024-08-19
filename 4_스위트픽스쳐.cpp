@@ -4,10 +4,12 @@
 
 #include <unistd.h>
 
+// 가정: Connect() / Disconnect() 느립니다.
+
 class Terminal {
 public:
-    void Connect() { }
-    void Disconnect() { }
+    void Connect() { sleep(2); }
+    void Disconnect() { sleep(1); }
 
     void LogIn(const std::string& id, const std::string& password) { }
     void LogOut() { }
@@ -77,3 +79,5 @@ TEST_F(TerminalTest, LogOut)
 
     ASSERT_FALSE(ts->IsLogin()) << "로그아웃 하였을 때";
 }
+
+TEST_F(TerminalTest, foo) {}
