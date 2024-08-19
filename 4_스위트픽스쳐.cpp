@@ -80,4 +80,4 @@ TEST_F(TerminalTest, LogOut)
     ASSERT_FALSE(ts->IsLogin()) << "로그아웃 하였을 때";
 }
 
-TEST_F(TerminalTest, foo) {}
+TEST_F(TerminalTest, foo) { }
