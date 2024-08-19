@@ -89,7 +89,6 @@ TEST(SampleTest2, Sample1)
 
 //  - 오차 범위를 직접 지정하고 싶은 경우
 //   : EXPECT_NEAR
-
 TEST(SampleTest3, Sample1)
 {
     double a = 0.7;
@@ -98,4 +97,41 @@ TEST(SampleTest3, Sample1)
 
     EXPECT_DOUBLE_EQ(a, b);
     EXPECT_NEAR(a, b, 0.0000000000);
+}
+
+// * 테스트 커버리지
+//  : 테스트 코드에 의해서 실행되는 제품 코드의 비율
+
+void OpenFile(const std::string& filename)
+{
+    if (filename.empty()) {
+        // throw 1;
+        throw std::invalid_argument("Invalid filename");
+    }
+
+    // ...
+}
+
+// 5. 예외 검증 단언문을 제공하고 있습니다.
+TEST(SampleTest4, OpenFile2)
+{
+    std::string emptyFilename = "";
+
+    EXPECT_THROW(OpenFile(emptyFilename), std::invalid_argument)
+        << "빈 파일을 전달하였을 때";
+}
+
+// 잘못된 파일이 전달되었을 때, invalid_argument 예외가 발생하는지 여부를 검증하고 싶습니다.
+TEST(SampleTest4, OpenFile)
+{
+    std::string emptyFilename = "";
+
+    try {
+        OpenFile(emptyFilename);
+        FAIL() << "예외가 발생하지 않았습니다.";
+    } catch (std::invalid_argument& e) {
+        SUCCEED();
+    } catch (...) {
+        FAIL() << "기대한 예외가 다릅니다.";
+    }
 }
