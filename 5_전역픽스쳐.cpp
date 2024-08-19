@@ -8,6 +8,9 @@
 
 #include <gtest/gtest.h>
 
+TEST(ImageProcessorTest, ResizeImage) { } // !!
+TEST(SampleTest, foo) { }
+
 // 전역 픽스쳐를 사용하는 방법.
 // 1) testing::Environment의 자식 클래스를 정의합니다.
 class MyEnvironment : public testing::Environment {
