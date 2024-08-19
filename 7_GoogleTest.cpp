@@ -37,7 +37,6 @@ TEST_F(DISABLED_SampleTest, hoo) { }
 
 //  - 앞의 조건에서 제외할 수 있는 기능도 제공합니다.
 // $ ./a.out --gtest_filter=Image*.foo:-ImageProcessorTest.foo
-
 TEST(ImageTest, foo) { } // ImageTest.foo
 TEST(ImageTest, goo) { } // ImageTest.goo
 TEST(ImageTest, hoo) { } // ImageTest.hoo
@@ -45,3 +44,7 @@ TEST(ImageTest, hoo) { } // ImageTest.hoo
 TEST(ImageProcessorTest, foo) { } // ImageProcessorTest.foo
 TEST(ImageProcessorTest, goo) { } // ImageProcessorTest.goo
 TEST(ImageProcessorTest, hoo) { } // ImageProcessorTest.hoo
+
+// 테스트의 성격에 따라서, 접두를 다르게 표현하였습니다.
+// A_foo
+// B_foo
