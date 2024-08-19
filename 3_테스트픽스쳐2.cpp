@@ -49,14 +49,37 @@ TEST(CalcTest, PressMinus)
 }
 #endif
 
-//        ::testing::Test
-//              |
+// * 암묵적인 테스트 스위트 클래스
+//           ::testing::Test
+//                  |
 //    -----------------------------------
 //    |                                  |
 //  CalcTest_PressPlus_Test      CalcTest_PressMinus_Test
-
+#if 0
 TEST(CalcTest, PressPlus) { }
 // class CalcTest_PressPlus_Test : public ::testing::Test
 
 TEST(CalcTest, PressMinus) { }
 // class CalcTest_PressMinus_Test : public ::testing::Test
+#endif
+
+// * 명시적인 테스트 스위트 클래스를 제공해서, 테스트 케이스를 만드는 방법.
+// => 테스트 유틸리티 메소드를 제공하기 위해서
+
+// 1) 명시적인 테스트 스위트 클래스
+class CalcTest : public testing::Test { };
+
+//           ::testing::Test
+//                  |
+//               CalcTest
+//                  |
+//    -----------------------------------
+//    |                                  |
+//  CalcTest_PressPlus_Test      CalcTest_PressMinus_Test
+
+// 2) 테스트 케이스
+TEST_F(CalcTest, PressPlus) { }
+// class CalcTest_PressPlus_Test : public CalcTest
+
+TEST_F(CalcTest, PressMinus) { }
+// class CalcTest_PressMinus_Test : public CalcTest
