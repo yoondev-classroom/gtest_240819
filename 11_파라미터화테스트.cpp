@@ -20,9 +20,16 @@ bool IsValidEmail(const std::string& email)
 //     기존) class EmailTest : public testing::Test {};
 
 // 파라미터화) class EmailTest : public testing::TestWithParam<데이터타입> {}
-
 class EmailTest : public testing::TestWithParam<std::string> {
 };
+
+// 2) 데이터 셋 정의
+// - INSTANTIATE_TEST_SUITE_P(prefix, testsuite_class, 데이터 셋)
+INSTANTIATE_TEST_SUITE_P(EmailValues, EmailTest,
+    testing::Values(
+        "valid@gmail.com",
+        "admin.h_lee@lge.com",
+        "hello@lge.com"));
 
 #if 0
 TEST(EMailTest, IsValidEmail)
