@@ -37,6 +37,8 @@ bool DrawImage(const std::string& url)
 //     - 메모리 / 스레드 / 미정의 동작
 //   => 모든 플랫폼에서 제공되지는 않습니다.
 //     - 컴파일 옵션: -fsanitize=address
+//                 -fsanitize=thread
+//                 -fsanitize=undefined
 
 TEST(ImageTest, DrawImage)
 {
