@@ -30,7 +30,7 @@ INSTANTIATE_TEST_SUITE_P(EmailValues, EmailTest,
         "valid@gmail.com",
         "admin.h_lee@lge.com",
         "hello@lge.com",
-        "chansik.yun@gmail.com"));
+        "chansik.yun@@gmail.com"));
 
 // 3) 데이터 셋을 이용하는 테스트 케이스를 정의하면 됩니다.
 //    - TEST
