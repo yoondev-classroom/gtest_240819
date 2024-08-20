@@ -94,6 +94,8 @@ protected:
     }
 };
 
+// g++ 8_비기능테스트3.cpp -I ./googletest/googletest/include/ -lgtest -L. -std=c++14 -pthread -DGTEST_LEAK_TEST
+
 TEST_F(ImageTest, DrawImage)
 {
     std::string url = "https://a.com/a.jpg";
