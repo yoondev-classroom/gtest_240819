@@ -44,9 +44,13 @@ class Logger {
     IFileSystem* fs;
 
 public:
-    Logger(IFileSystem* p)
+    Logger(IFileSystem* p = nullptr)
         : fs { p }
     {
+        // 기존 제품 코드의 생성 방식과 동일하게 만들기 위해 제공합니다.
+        if (p == nullptr) {
+            fs = new FileSystem;
+        }
     }
 
     // 확장자를 제외한 파일명이 5글자 이상이어야 한다.
