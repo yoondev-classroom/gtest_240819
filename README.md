@@ -1,5 +1,7 @@
 # Google Test
 
+## 구글 테스트 프레임워크 환경 설정
+
 ```sh
 # gtest-all.cc
 $ g++ -c -std=c++14 -O2 ./googletest/googletest/src/gtest-all.cc \
