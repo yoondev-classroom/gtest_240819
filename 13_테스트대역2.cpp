@@ -112,3 +112,8 @@ TEST(LoggerTest, IsValidLogFilename_NameShorterThan5Chars_ReturnsFalse)
 
 // Test Double(테스트 대역)
 // : xUnit Test Pattern
+//  => 4가지 종류
+// 1) Test Stub
+// 2) Fake Object
+// 3) Test Spy
+// 4) Mock Object
