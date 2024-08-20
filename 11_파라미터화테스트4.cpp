@@ -5,7 +5,7 @@
 #include <gtest/gtest.h>
 
 enum Color {
-    RED,
+    RED = 100,
     WHITE,
     BLACK,
     BLUE,
