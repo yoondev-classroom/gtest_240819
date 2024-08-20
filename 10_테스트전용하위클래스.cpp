@@ -23,10 +23,15 @@ public:
 
 class TestUser : public User {
 public:
+    using User::GetAge;
+    // 부모가 제공하는 protected를 public으로 변경하는 문법입니다.
+
+#if 0
     int GetAge() const
     {
         return User::GetAge();
     }
+#endif
 };
 
 TEST(UserTest, foo)
