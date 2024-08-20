@@ -16,6 +16,8 @@ public:
         std::cout << "Draw Image: " << url << std::endl;
     }
 
+// 조건부 컴파일을 통해서, 테스트 코드에서만 사용될 수 있도록 만들어야 합니다.
+#ifdef GTEST_LEAK_TEST
     static int allocCount;
 
     void* operator new(size_t size)
@@ -29,9 +31,12 @@ public:
         free(p);
         --allocCount;
     }
+#endif
 };
 
+#ifdef GTEST_LEAK_TEST
 int Image::allocCount = 0;
+#endif
 
 bool DrawImage(const std::string& url)
 {
@@ -75,13 +80,17 @@ protected:
 
     void SetUp() override
     {
+#ifdef GTEST_LEAK_TEST
         alloc = Image::allocCount;
+#endif
     }
 
     void TearDown() override
     {
+#ifdef GTEST_LEAK_TEST
         int diff = Image::allocCount - alloc;
         EXPECT_EQ(diff, 0) << "Memory Leak: " << diff << " object(s) 누수";
+#endif
     }
 };
 
