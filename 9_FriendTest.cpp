@@ -1,5 +1,5 @@
 // 9_FriendTest.cpp
-#include <gtest/gtest.h>
+#include <gtest/gtest_prod.h>
 
 class User {
     int age = 42;
@@ -20,7 +20,9 @@ public:
 
     FRIEND_TEST(UserTest, foo);
 };
+//----
 
+#include <gtest/gtest.h>
 // * 문제점
 // : 테스트 코드에서 상태를 확인하는 메소드가
 //   private 영역에 존재해서, 외부에서 접근이 불가능합니다.
@@ -32,6 +34,7 @@ public:
 //  - private 메소드의 용도를 public 메소드의 가독성을 높이는 목적으로 사용해야 한다.
 
 //  - Google Test는 FRIEND_TEST 기능을 제공합니다.
+//   => 제품코드에 Google Test 의존성이 발생합니다.
 
 TEST(UserTest, foo)
 {
