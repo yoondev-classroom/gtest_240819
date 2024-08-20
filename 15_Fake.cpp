@@ -68,6 +68,12 @@ public:
     }
 };
 
+// 1) 사용자 정의 타입에 대해서, 단언문을 사용할 경우, 단언문이 사용하는 연산자에 대한 재정의가 필요합니다.
+bool operator==(const User& lhs, const User& rhs)
+{
+    return lhs.GetName() == rhs.GetName() && lhs.GetAge() == rhs.GetAge();
+}
+
 TEST(RepositoryTest, Save)
 {
     FakeDatebase fake;
@@ -79,5 +85,5 @@ TEST(RepositoryTest, Save)
     repo.Save(&expected);
     User* actual = repo.Load(testName);
 
-    EXPECT_EQ(*actual, expected);
+    EXPECT_EQ(*actual, expected); // ==
 }
