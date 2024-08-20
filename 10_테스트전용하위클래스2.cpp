@@ -47,6 +47,7 @@ public:
         isStart = true;
     }
 
+    // 테스트에서 확인할 수 있는 기능을 테스트 전용 하위 클래스를 통해서 제공합니다.
     bool IsStart() const
     {
         return isStart;
