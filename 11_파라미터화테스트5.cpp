@@ -12,7 +12,28 @@
 //       testing::ValuesIn(data)
 //    )
 
-class SampleTest : public testing::TestWithParam<int> { };
+class SampleTest : public testing::TestWithParam<int> {
+protected:
+    void SetUp() override
+    {
+        std::cout << "SetUp()" << std::endl;
+    }
+
+    void TearDown() override
+    {
+        std::cout << "TearDown()" << std::endl;
+    }
+
+    static void SetUpTestSuite()
+    {
+        std::cout << "SetUpTestSuite()" << std::endl;
+    }
+
+    static void TearDownTestSuite()
+    {
+        std::cout << "TearDownTestSuite()" << std::endl;
+    }
+};
 
 // 1<100 => 1 ~ 99
 INSTANTIATE_TEST_SUITE_P(IntValues, SampleTest,
