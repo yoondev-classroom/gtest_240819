@@ -37,6 +37,8 @@ INSTANTIATE_TEST_SUITE_P(EmailValues, EmailTest,
 //    - TEST_F
 //    - TEST_P => 파라미터화 테스트케이스
 //      : GetParam()
+
+// class EmailTest_IsValidEmail_Test : public EmailTest
 TEST_P(EmailTest, IsValidEmail)
 {
     std::string email = GetParam();
