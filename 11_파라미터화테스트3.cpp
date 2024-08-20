@@ -49,7 +49,7 @@ TEST_P(PrimeTest, IsPrime_2)
 // 2) 사용자 정의 타입
 // => Google Test에서 사용자 정의 타입이 표현될 때,
 //    원하는 형태로 표현될 수 있도록 연산자 재정의를 제공해주어야 합니다.
-
+#if 1
 struct InputType {
     int good;
     int bad;
@@ -85,3 +85,4 @@ TEST_P(PrimeTest, IsPrime_2)
 
     EXPECT_FALSE(IsPrime(data.bad));
 }
+#endif
