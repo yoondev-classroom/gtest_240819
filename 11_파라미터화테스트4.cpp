@@ -21,14 +21,15 @@ std::vector<std::string> cars = {
 // 테스트를 수행할 수 있습니다.
 // => tuple
 
-using CarType = std::tuple<std::string, Color>;
+using CarType = std::tuple<std::string, Color, int>;
 
 class CarTest : public testing::TestWithParam<CarType> { };
 
 INSTANTIATE_TEST_SUITE_P(CarValues, CarTest,
     testing::Combine(
         testing::ValuesIn(cars),
-        testing::ValuesIn(colors)));
+        testing::ValuesIn(colors),
+        testing::Values(2020, 2021, 2022, 2023)));
 
 TEST_P(CarTest, Sample)
 {
@@ -37,5 +38,7 @@ TEST_P(CarTest, Sample)
     std::string model = std::get<0>(data);
     Color color = std::get<1>(data);
 
-    std::cout << model << ", " << color << std::endl;
+    int year = std::get<2>(data);
+
+    std::cout << model << ", " << color << ", " << year << std::endl;
 }
