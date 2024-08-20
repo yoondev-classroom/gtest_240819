@@ -72,8 +72,8 @@ public:
 // 1) 사용자 정의 타입에 대해서, 단언문을 사용할 경우, 단언문이 사용하는 연산자에 대한 재정의가 필요합니다.
 bool operator==(const User& lhs, const User& rhs)
 {
-    return false;
-    // return lhs.GetName() == rhs.GetName() && lhs.GetAge() == rhs.GetAge();
+    // return false;
+    return lhs.GetName() == rhs.GetName() && lhs.GetAge() == rhs.GetAge();
 }
 
 // 2) 사용자 정의 객체를 단언문을 통해 검증할 때,
