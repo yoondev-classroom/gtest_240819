@@ -28,6 +28,7 @@ bool DrawImage(const std::string& url)
 
 #include <gtest/gtest.h>
 
+// 메모리 누수 여부를, 단위 테스트를 통해서 검증하고 싶습니다.
 TEST(ImageTest, DrawImage)
 {
     std::string url = "https://a.com/a.jpg";
