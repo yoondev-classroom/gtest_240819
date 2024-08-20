@@ -31,6 +31,17 @@ INSTANTIATE_TEST_SUITE_P(EmailValues, EmailTest,
         "admin.h_lee@lge.com",
         "hello@lge.com"));
 
+// 3) 데이터 셋을 이용하는 테스트 케이스를 정의하면 됩니다.
+//    - TEST
+//    - TEST_F
+//    - TEST_P => 파라미터화 테스트케이스
+//      : GetParam()
+TEST_P(EmailTest, IsValidEmail)
+{
+    std::string email = GetParam();
+    EXPECT_TRUE(IsValidEmail(email));
+}
+
 #if 0
 TEST(EMailTest, IsValidEmail)
 {
