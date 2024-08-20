@@ -43,7 +43,7 @@ TEST(LoggerTest, IsValidLogFilename_NameLongerThan5Chars_ReturnsTrue)
         << "확장자를 제외한 파일명이 5글자 이상일 때";
 }
 
-TEST(LoggerTest, IsValidLogFilename_NAmeShorterThan5Chars_ReturnsFalse)
+TEST(LoggerTest, IsValidLogFilename_NameShorterThan5Chars_ReturnsFalse)
 {
     Logger logger;
     std::string invalidFilename = "bad.log";

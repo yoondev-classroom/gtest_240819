@@ -100,7 +100,7 @@ TEST(LoggerTest, IsValidLogFilename_NameLongerThan5Chars_ReturnsTrue)
         << "확장자를 제외한 파일명이 5글자 이상일 때";
 }
 
-TEST(LoggerTest, IsValidLogFilename_NAmeShorterThan5Chars_ReturnsFalse)
+TEST(LoggerTest, IsValidLogFilename_NameShorterThan5Chars_ReturnsFalse)
 {
     TestDoubleFileSystem td;
     Logger logger { &td };
@@ -109,3 +109,6 @@ TEST(LoggerTest, IsValidLogFilename_NAmeShorterThan5Chars_ReturnsFalse)
     EXPECT_FALSE(logger.IsValidLogFilename(invalidFilename))
         << "확장자를 제외한 파일명이 5글자 미만일 때";
 }
+
+// Test Double(테스트 대역)
+// : xUnit Test Pattern
