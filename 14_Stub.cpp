@@ -50,9 +50,29 @@ public:
 
 #include <gtest/gtest.h>
 
+// Test Stub Pattern
+//  의도: 다른 컴포넌트로부터의 간접 입력에 의존하는 로직을 독립적으로 검증하고 싶습니다.
+//  방법: 실제 의존하는 객체를 테스트 대역으로 교체해서,
+//       SUT가 테스트하는데 필요한 결과를 보내도록 제어합니다.
+class StubTime : public Time {
+    std::string result;
+
+public:
+    StubTime(const std::string& r)
+        : result { r }
+    {
+    }
+
+    std::string GetCurrentTime() const override
+    {
+        return result;
+    }
+};
+
 TEST(SchedulerTest, Alarm_00_00)
 {
-    Clock clock;
+    // Clock clock;
+    StubTime clock { "00:00" };
     Scheduler scheduler { &clock };
 
     int result = scheduler.Alarm();
@@ -62,7 +82,8 @@ TEST(SchedulerTest, Alarm_00_00)
 
 TEST(SchedulerTest, Alarm_10_00)
 {
-    Clock clock;
+    // Clock clock;
+    StubTime clock { "10:00" };
     Scheduler scheduler { &clock };
 
     int result = scheduler.Alarm();
