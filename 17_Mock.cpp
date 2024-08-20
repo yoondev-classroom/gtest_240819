@@ -32,6 +32,7 @@ public:
     {
         for (auto e : targets) {
             e->Write(level, message);
+            break;
         }
     }
 };
@@ -63,19 +64,23 @@ public:
     MOCK_METHOD2(Write, void(Level level, const std::string& message));
 };
 
+// * 주의사항: Google Mock은 Act 하기 전에 EXPECT_CALL 해야 합니다.
 TEST(DLoggerTest, Write)
 {
+    // Arrange
     DLogger logger;
     MockDLoggerTarget t1, t2;
     logger.AddTarget(&t1);
     logger.AddTarget(&t2);
 
-    logger.Write(INFO, "test_message1");
-    logger.Write(WARN, "test_message2");
-
+    // Assert
     // 행위 기반 검증 단언문
     EXPECT_CALL(t1, Write(INFO, "test_message1"));
     EXPECT_CALL(t1, Write(WARN, "test_message2"));
     EXPECT_CALL(t2, Write(INFO, "test_message1"));
     EXPECT_CALL(t2, Write(WARN, "test_message2"));
+
+    // Act
+    logger.Write(INFO, "test_message1");
+    logger.Write(WARN, "test_message2");
 }
