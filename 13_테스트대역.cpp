@@ -6,7 +6,8 @@ public:
     bool IsValidFilename(const std::string& name)
     {
         // 현재의 파일 시스템에서 적합한 이름인지 확인합니다.
-        return true;
+        // return true;
+        return false;
     }
 };
 
