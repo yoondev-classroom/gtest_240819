@@ -2,14 +2,16 @@
 
 bool IsPrime(int value)
 {
-    // return false;
+
     for (int i = 2; i < value; ++i) {
         if (value % i == 0) {
-            return false;
+            // return false;
+            return true;
         }
     }
 
-    return true;
+    // return true;
+    return false;
 }
 
 #include <gtest/gtest.h>
@@ -45,10 +47,19 @@ TEST_P(PrimeTest, IsPrime_2)
 #endif
 
 // 2) 사용자 정의 타입
+// => Google Test에서 사용자 정의 타입이 표현될 때,
+//    원하는 형태로 표현될 수 있도록 연산자 재정의를 제공해주어야 합니다.
+
 struct InputType {
     int good;
     int bad;
 };
+
+// 연산자 재정의 함수
+std::ostream& operator<<(std::ostream& os, const InputType& data)
+{
+    return os << "{" << "good: " << data.good << ", bad: " << data.bad << "}";
+}
 
 class PrimeTest : public testing::TestWithParam<InputType> { };
 
