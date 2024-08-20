@@ -8,6 +8,13 @@
 //   => 약한 결합(느슨한 결합)
 //    : 협력 객체를 이용할 때, 추상 타입(추상 클래스/인터페이스)에 의존하는 것
 
+// Logger
+//   IsValidLogFilename ---<>  << IFileSystem >>
+//                                    |
+//                                  ----------
+//                                  |        |
+//                            FileSystem   TestDouble
+
 //  <강한 결합>
 //   : 협력 객체를 이용할 때, 구체적인 타입에 의존하는 것
 // Logger
@@ -74,9 +81,19 @@ public:
 
 #include <gtest/gtest.h>
 
+// 테스트 대역은 협력 객체의 인터페이스를 구현하는 형태로 만듭니다.
+class TestDoubleFileSystem : public IFileSystem {
+public:
+    bool IsValidFilename(const std::string& name) override
+    {
+        return true;
+    }
+};
+
 TEST(LoggerTest, IsValidLogFilename_NameLongerThan5Chars_ReturnsTrue)
 {
-    Logger logger;
+    TestDoubleFileSystem td;
+    Logger logger { &td };
     std::string validFilename = "valid.log";
 
     EXPECT_TRUE(logger.IsValidLogFilename(validFilename))
@@ -85,7 +102,8 @@ TEST(LoggerTest, IsValidLogFilename_NameLongerThan5Chars_ReturnsTrue)
 
 TEST(LoggerTest, IsValidLogFilename_NAmeShorterThan5Chars_ReturnsFalse)
 {
-    Logger logger;
+    TestDoubleFileSystem td;
+    Logger logger { &td };
     std::string invalidFilename = "bad.log";
 
     EXPECT_FALSE(logger.IsValidLogFilename(invalidFilename))
