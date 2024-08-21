@@ -59,7 +59,8 @@ void Process2(Dog* p)
 //       |
 //       ---> Third -> Fourth   ; seq2
 
-// => EXPECT_CALL().InSequence()
+//  => testing::Sequence seq;
+//     EXPECT_CALL().InSequence(seq)
 using testing::Sequence;
 
 TEST(DogTest, Sample2)
@@ -99,23 +100,31 @@ public:
 void foo(Car* p)
 {
     p->f1();
-    p->f2();
-    p->f3();
     p->f4();
+
+    p->f3();
     p->f5();
+
+    p->f2();
 }
 
-// f1 ---> f2
+// f1 ---> f2               ; seq1
 //    |
-//    ---> f3 --> f5
+//    ---> f3 --> f5        ; seq2
 //    |
-//    ---> f4
+//    ---> f4               ; seq3
 
 TEST(CarTest, Sample)
 {
     MockCar mock;
+    Sequence seq1, seq2, seq3;
 
     // EXPECT_CALL
+    EXPECT_CALL(mock, f1).InSequence(seq1, seq2, seq3);
+    EXPECT_CALL(mock, f2).InSequence(seq1);
+    EXPECT_CALL(mock, f3).InSequence(seq2);
+    EXPECT_CALL(mock, f4).InSequence(seq3);
+    EXPECT_CALL(mock, f5).InSequence(seq2);
 
     foo(&mock);
 }
