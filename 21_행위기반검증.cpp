@@ -58,3 +58,23 @@ TEST(PersonTest, Sample1)
 
     UsePerson(&mock);
 } // 범위를 벗어나면 자동으로 파괴되면서 검증이 수행됩니다.
+
+// 2) 함수 호출 횟수
+//   EXPECT_CALL(...).Times(N)
+
+void UsePerson2(Person* p)
+{
+    p->Go(10, 20);
+    p->Go(10, 20);
+    p->Go(10, 20);
+}
+
+TEST(PersonTest2, Sample1)
+{
+    MockPerson mock;
+
+    // EXPECT_CALL(mock, Go(10, 20)); // 1번
+    EXPECT_CALL(mock, Go(10, 20)).Times(3);
+
+    UsePerson2(&mock);
+}
