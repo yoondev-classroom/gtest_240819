@@ -30,24 +30,27 @@ public:
 // => 모든 인자에 대해서 검증이 필요한 것이 아니라, 특정한 인자에 대해서만 검증하고 싶습니다.
 #include <gmock/gmock.h>
 
-#if 0
+#if 1
 class MockLogger : public Logger {
 public:
     //  void Send(Level level, const char* dir, const char* file, const char* message) override
     MOCK_METHOD(void, Send, (Level level, const char* dir, const char* file, const char* message), (override));
 };
 
+using testing::_;
+
 TEST(CarTest, Start)
 {
     MockLogger logger;
     Car car;
 
-    EXPECT_CALL(logger, Send(INFO, "/tmp", "car.log", "car start..."));
+    EXPECT_CALL(logger, Send(_, "/tmp", _, _));
 
     car.Start(&logger);
 }
 #endif
 
+#if 0
 class MockLogger : public Logger {
 public:
     void Send(Level level, const char* dir, const char* file, const char* message) override
@@ -71,3 +74,4 @@ TEST(CarTest, Start)
 
     car.Start(&logger);
 }
+#endif
