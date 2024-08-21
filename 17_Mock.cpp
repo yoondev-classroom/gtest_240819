@@ -32,7 +32,7 @@ public:
     {
         for (auto e : targets) {
             e->Write(level, message);
-            break;
+            // break;
         }
     }
 };
@@ -84,3 +84,27 @@ TEST(DLoggerTest, Write)
     logger.Write(INFO, "test_message1");
     logger.Write(WARN, "test_message2");
 }
+
+// * 테스트 대역(Test Double)
+// => xUnit Test Pattern
+// => xUnit Test Pattern 이전에는 테스트 대역을 Mock이라고 불렀습니다.
+//  "Google Mock"은 테스트 대역을 위한 프레임워크입니다.
+//   - 행위 기반 검증 뿐 아니라 다양한 기능을 제공하고 있습니다.
+//     Stub / Fake
+
+// 1) Test Stub
+//  => SUT가 테스트하는데 필요한 결과를 테스트 대역을 통해 제어합니다.
+//    "시간/파일시스템 - 특수한 상황을 시뮬레이션 하는 목적"
+
+// 2) Fake Object
+//  => 협력 객체가 준비되지 않았거나, 사용하기 어렵거나, 너무 느려서 테스트 되지 않은 요구사항이 존재합니다.
+//     같은 역활을 수행하는 가벼운 테스트 대역을 통해서 SUT를 검증합니다.
+
+// 3) Test Spy
+//  => 관찰할 수 있는 SUT의 상태가 존재하지 않습니다.
+//     협력 객체를 이용해서 목격한 일을 기록해두었다가, 테스트에서 확인할 수 있도록 하는 테스트 대역을 만듭니다.
+
+// 4) Mock Object
+//  => 관찰할 수 있는 SUT의 상태가 존재하지 않습니다.
+//     협력 객체를 대상으로 호출되는 메소드의 호출 여부/횟수/순서/인자 등을 통해 검증합니다.
+//     "행위 기반 검증 / 동작 검증"
