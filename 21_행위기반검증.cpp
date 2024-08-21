@@ -109,11 +109,24 @@ using testing::Lt; // <
 using testing::AllOf; // &&
 using testing::AnyOf; // ||
 
+using testing::_; // Anything
+
 void UsePerson4(Person* p)
 {
     p->Go(11, -100);
     p->Go(19, 11);
     p->Go(5, 19);
+}
+
+TEST(PersonTest3, Sample3)
+{
+    MockPerson mock;
+
+    // 첫번째 인자: 5 이상입니다.
+    // 두번째 인자는 아무거나 상관없습니다.
+    EXPECT_CALL(mock, Go(Ge(5), _)).Times(3);
+
+    UsePerson4(&mock);
 }
 
 TEST(PersonTest3, Sample2)
