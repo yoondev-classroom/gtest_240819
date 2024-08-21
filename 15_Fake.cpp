@@ -105,6 +105,7 @@ TEST(RepositoryTest, Save)
 
 #include <gmock/gmock.h>
 
+#if 0
 class MockDatabase : public IDatabase {
 public:
     // void SaveUser(const std::string& name, User* user) override
@@ -127,6 +128,45 @@ TEST(RepositoryTest2, Save)
         return data[name];
     });
 
+    Repository repo { &fake };
+    std::string testName = "test_name";
+    int testAge = 42;
+    User expected { testName, testAge };
+
+    repo.Save(&expected);
+    User* actual = repo.Load(testName);
+
+    ASSERT_NE(actual, nullptr);
+    EXPECT_EQ(*actual, expected); // ==
+}
+#endif
+
+class MockDatabase : public IDatabase {
+    std::map<std::string, User*> data;
+
+public:
+    MockDatabase()
+    {
+        ON_CALL(*this, SaveUser).WillByDefault([this](const std::string& name, User* user) {
+            data[name] = user;
+        });
+        ON_CALL(*this, LoadUser).WillByDefault([this](const std::string& name) {
+            return data[name];
+        });
+    }
+
+    // void SaveUser(const std::string& name, User* user) override
+    MOCK_METHOD(void, SaveUser, (const std::string& name, User* user), (override));
+
+    // User* LoadUser(const std::string& name) override
+    MOCK_METHOD(User*, LoadUser, (const std::string& name), (override));
+};
+
+using testing::NiceMock;
+
+TEST(RepositoryTest2, Save)
+{
+    NiceMock<MockDatabase> fake;
     Repository repo { &fake };
     std::string testName = "test_name";
     int testAge = 42;
