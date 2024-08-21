@@ -38,7 +38,7 @@ struct Adder {
     int operator()(int a, int b) const { return a + b; }
 };
 
-TEST(CalcTest, Process)
+TEST(CalcTest, Process2)
 {
     NiceMock<MockCalc> mock;
     // ON_CALL(mock, Add(10, 20)).WillByDefault(Return(30));
@@ -53,7 +53,6 @@ TEST(CalcTest, Process)
     std::cout << mock.Add(100, 20) << std::endl;
 }
 
-#if 0
 TEST(CalcTest, Process)
 {
     MockCalc mock;
@@ -68,4 +67,3 @@ TEST(CalcTest, Process)
 
     Process(&mock);
 }
-#endif
