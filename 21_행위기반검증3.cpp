@@ -55,3 +55,15 @@ TEST(CalcTest, Process2)
 
     Process(&mock);
 }
+
+TEST(CalcTest, Process3)
+{
+    MockCalc mock;
+
+    EXPECT_CALL(mock, Add(10, 20))
+        .WillOnce(Return(30))
+        .WillOnce(Return(300));
+
+    std::cout << mock.Add(10, 20) << std::endl;
+    std::cout << mock.Add(10, 20) << std::endl;
+}
