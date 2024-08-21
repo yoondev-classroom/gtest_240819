@@ -40,3 +40,18 @@ TEST(CalcTest, Process)
 
     Process(&mock);
 }
+
+// EXPECT_CALL과 ON_CALL을 동시에 사용할 경우,
+// EXPECT_CALL을 통해서 ON_CALL을 사용하지 않고,
+// Delegating을 수행할 수 있습니다.
+//  => EXPECT_CALL(...).WillOnce(...)
+
+TEST(CalcTest, Process2)
+{
+    MockCalc mock;
+
+    EXPECT_CALL(mock, Add(10, 20)).WillOnce(Return(30));
+    EXPECT_CALL(mock, Sub(100, 50)).WillOnce(Return(50));
+
+    Process(&mock);
+}
