@@ -8,6 +8,9 @@ public:
 
     virtual void Play() = 0;
     virtual bool Stop(int n) = 0;
+
+    virtual std::string GetTitle() const = 0;
+    virtual void Go() const noexcept = 0;
 };
 
 // 협력 객체의 인터페이스를 구현하는 형태로 만들어야 합니다.
