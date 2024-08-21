@@ -30,12 +30,35 @@ public:
 //   => Delegating(위임)
 //    ON_CALL
 
+using testing::NiceMock;
 using testing::Return;
 
+int add(int a, int b) { return a + b; }
+struct Adder {
+    int operator()(int a, int b) const { return a + b; }
+};
+
+TEST(CalcTest, Process)
+{
+    NiceMock<MockCalc> mock;
+    // ON_CALL(mock, Add(10, 20)).WillByDefault(Return(30));
+    // ON_CALL(mock, Add).WillByDefault(Return(30));
+    // ON_CALL(mock, Add).WillByDefault(&add); // 함수
+    // ON_CALL(mock, Add).WillByDefault(Adder {}); // 함수 객체
+    ON_CALL(mock, Add).WillByDefault([](int a, int b) { // 람다 표현식
+        return a + b;
+    });
+
+    std::cout << mock.Add(10, 20) << std::endl;
+    std::cout << mock.Add(100, 20) << std::endl;
+}
+
+#if 0
 TEST(CalcTest, Process)
 {
     MockCalc mock;
     ON_CALL(mock, Add(10, 20)).WillByDefault(Return(30));
+    ON_CALL(mock, Sub(100, 50)).WillByDefault(Return(50));
 
     EXPECT_CALL(mock, Add(10, 20));
     EXPECT_CALL(mock, Sub(100, 50));
@@ -45,3 +68,4 @@ TEST(CalcTest, Process)
 
     Process(&mock);
 }
+#endif

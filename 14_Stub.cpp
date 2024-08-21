@@ -91,6 +91,13 @@ TEST(SchedulerTest, Alarm_10_00)
     EXPECT_EQ(result, 100) << "10:00 일때";
 };
 
+#include <gmock/gmock.h>
+// Google Mock을 이용해서, 위의 코드를 변경해서 작성해보세요.
+
+class MockTime : public Time {
+public:
+};
+
 #if 0
 int main()
 {
