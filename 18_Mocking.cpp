@@ -11,6 +11,11 @@ public:
 
     virtual std::string GetTitle() const = 0;
     virtual void Go() const noexcept = 0;
+
+    virtual std::pair<bool, int> GetPair() const = 0;
+
+    // 아래 함수를 MOCK_METHOD 해보세요.
+    virtual bool CheckMap(std::map<std::string, int> a, bool b) const = 0;
 };
 
 // 협력 객체의 인터페이스를 구현하는 형태로 만들어야 합니다.
@@ -23,6 +28,17 @@ public:
 
     // bool Stop(int n) override
     MOCK_METHOD(bool, Stop, (int n), (override));
+
+    // std::string GetTitle() const override
+    MOCK_METHOD(std::string, GetTitle, (), (const, override));
+
+    // void Go() const noexcept override
+    MOCK_METHOD(void, Go, (), (const, noexcept, override));
+
+    // std::pair<bool, int> GetPair() const override
+    // 주의사항: 템플릿의 타입 인자가 2개 이상인 경우,
+    //         괄호로 감싸주어야 한다.
+    MOCK_METHOD((std::pair<bool, int>), GetPair, (), (const, override));
 };
 
 TEST(SampleTest, Sample)
