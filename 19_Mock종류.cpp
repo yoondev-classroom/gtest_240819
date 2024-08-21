@@ -40,6 +40,8 @@ Uninteresting mock function call - returning default value.
 
 // 3) StrictMock
 //  => EXPECT_CALL 되지 않은 메소드가 호출되면, 테스트는 실패합니다.
+//  => 주의해야 합니다.
+//     : 테스트를 통과하는 기준이 높아져서, 테스트를 작성하는 비용이 증가할 수 있습니다.
 
 class MockCar : public Car {
 public:
