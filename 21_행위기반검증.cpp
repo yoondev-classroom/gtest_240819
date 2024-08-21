@@ -109,11 +109,11 @@ using testing::Lt; // <
 using testing::AllOf; // &&
 using testing::AnyOf; // ||
 
-void UsePerson3(Person* p)
+void UsePerson4(Person* p)
 {
-    p->Go(10, 20);
-    p->Go(10, 20);
-    p->Go(10, 21);
+    p->Go(11, -100);
+    p->Go(19, 11);
+    p->Go(5, 19);
 }
 
 TEST(PersonTest3, Sample2)
@@ -123,8 +123,17 @@ TEST(PersonTest3, Sample2)
     // 첫번째 인자: 5 이상이고 20 미만입니다.   => &&
     Matcher<int> arg0 = AllOf(Ge(5), Lt(20));
     // 두번째 인자: 0 미만이거나, 10 초과입니다. => ||
+    Matcher<int> arg1 = AnyOf(Lt(0), Gt(10));
+    EXPECT_CALL(mock, Go(arg0, arg1)).Times(3);
 
-    UsePerson3(&mock);
+    UsePerson4(&mock);
+}
+
+void UsePerson3(Person* p)
+{
+    p->Go(10, 20);
+    p->Go(10, 20);
+    p->Go(10, 20);
 }
 
 TEST(PersonTest3, Sample1)
