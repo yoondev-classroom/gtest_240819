@@ -25,3 +25,36 @@ public:
     MOCK_METHOD(void, Print, (const std::vector<int>& numbers), (override));
     MOCK_METHOD(void, SetAddress, (const std::string& address), (override));
 };
+
+void UsePerson(Person* p)
+{
+    p->Go(100, 20);
+}
+
+// EXPECT_CALL
+// - 별도의 오류 메세지를 지정할 수 있는 기능을 제공하지 않습니다.
+// - 협력 객체를 대상으로 호출이 되기 이전에, EXPECT_CALL을 먼저 작성해야 합니다.
+// - mock 객체가 파괴될 때, EXPECT_CALL에 대한 검증이 수행됩니다.
+
+// 1) 함수 호출 여부
+TEST(PersonTest, Sample2)
+{
+    MockPerson* mock = new MockPerson;
+
+    // EXPECT_CALL(mock, Go(10, 20));
+    EXPECT_CALL(*mock, Go); // 인자와 상관없이 호출 여부를 판단합니다.
+
+    UsePerson(mock);
+
+    delete mock; // !! 검증이 수행됩니다.
+}
+
+TEST(PersonTest, Sample1)
+{
+    MockPerson mock;
+
+    // EXPECT_CALL(mock, Go(10, 20));
+    EXPECT_CALL(mock, Go); // 인자와 상관없이 호출 여부를 판단합니다.
+
+    UsePerson(&mock);
+} // 범위를 벗어나면 자동으로 파괴되면서 검증이 수행됩니다.
