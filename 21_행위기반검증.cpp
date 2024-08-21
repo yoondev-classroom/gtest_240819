@@ -162,3 +162,51 @@ TEST(PersonTest3, Sample1)
 
     UsePerson3(&mock);
 }
+
+void UsePerson5(Person* p)
+{
+    // p->Print({ 1, 2, 3 });
+    p->Print({ 3, 2, 1 });
+}
+
+using testing::ElementsAre;
+using testing::ElementsAreArray;
+using testing::UnorderedElementsAre;
+using testing::UnorderedElementsAreArray;
+
+TEST(PersonTest4, Sample1)
+{
+    MockPerson mock;
+
+    // Print로 전달되는 인자
+    // [0]: 10보다 작아야 합니다. => Lt(10)
+    // [1]: 2 이상입니다.       => Ge(2)
+    // [2]: 5 이하입니다.       => Le(5)
+    // Matcher<int> args[] = { Lt(10), Ge(2), Le(5) };
+    // EXPECT_CALL(mock, Print(ElementsAreArray(args)));
+    // EXPECT_CALL(mock, Print(ElementsAre(Lt(10), Ge(2), Le(5))));
+
+    // 순서와 상관없이 검증할 수 있느 기능도 제공됩니다.
+    EXPECT_CALL(mock, Print(UnorderedElementsAre(Lt(10), Ge(2), Le(5))));
+
+    UsePerson5(&mock);
+}
+
+void UsePerson6(Person* p)
+{
+    p->SetAddress("XXX Seoul XXX");
+}
+
+using testing::ContainsRegex;
+using testing::HasSubstr;
+
+TEST(PersonTest5, Sample)
+{
+    MockPerson mock;
+
+    // EXPECT_CALL(mock, SetAddress("Seoul"));
+    // EXPECT_CALL(mock, SetAddress(HasSubstr("Seoul")));
+    EXPECT_CALL(mock, SetAddress(ContainsRegex("Seoul")));
+
+    UsePerson6(&mock);
+}
