@@ -56,14 +56,49 @@ TEST(CalcTest, Process2)
     Process(&mock);
 }
 
+// 중요: EXPECT_CALL().WillOnce/WillRepeatedly를 사용하면, Times에 영향을 줍니다.
+
+// - EXPECT_CALL(...)
+// => EXPECT_CALL(...).Times(1)
+
+// - EXPECT_CALL(...).WillOnce(...)
+// => EXPECT_CALL(...).Times(1)
+
+// - EXPECT_CALL(...).WillOnce(...).WillOnce(...)
+// => EXPECT_CALL(...).Times(2)
+
+// - EXPECT_CALL(...).WillOnce(...).WillOnce(...).WillOnce(...)
+// => EXPECT_CALL(...).Times(3)
+
+// - EXPECT_CALL(...).WillOnce(...).WillOnce(...).WillOnce(...)
+// => WillOnce: N
+//    WillRepeatedly: AtLeast
+//    : EXPECT_CALL(...).Times(AtLeast(N))
+
+// * WillRepeatedly는 한번만 사용 가능합니다.
+//   WillOnce 존재한다면 WillOnce 후에 사용이 가능합니다.
+
 TEST(CalcTest, Process3)
 {
     MockCalc mock;
 
     EXPECT_CALL(mock, Add(10, 20))
         .WillOnce(Return(30))
-        .WillOnce(Return(300));
+        .WillOnce(Return(300))
+        .WillRepeatedly(Return(1000)); // 2번 이상
 
-    std::cout << mock.Add(10, 20) << std::endl;
-    std::cout << mock.Add(10, 20) << std::endl;
+    std::cout << mock.Add(10, 20) << std::endl; // 30
+    std::cout << mock.Add(10, 20) << std::endl; // 300
+    std::cout << mock.Add(10, 20) << std::endl; // 1000
+    std::cout << mock.Add(10, 20) << std::endl; // 1000
+    std::cout << mock.Add(10, 20) << std::endl; // 1000
+    std::cout << mock.Add(10, 20) << std::endl; // 1000
+}
+
+TEST(CalcTest, Process4)
+{
+    MockCalc mock;
+
+    EXPECT_CALL(mock, Add(10, 20))
+        .WillRepeatedly(Return(1000)); // ?
 }
