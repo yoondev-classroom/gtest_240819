@@ -95,13 +95,36 @@ TEST(PersonTest2, Sample1)
 //  => Matcher
 //    : Hamcrest라는 비교 표현의 확장 라이브러리
 
-using namespace testing;
+using testing::Matcher;
+
+using testing::Eq; // ==
+using testing::Ne; // !=
+
+using testing::Ge; // >=
+using testing::Gt; // >
+
+using testing::Le; // <=
+using testing::Lt; // <
+
+using testing::AllOf; // &&
+using testing::AnyOf; // ||
 
 void UsePerson3(Person* p)
 {
     p->Go(10, 20);
     p->Go(10, 20);
     p->Go(10, 21);
+}
+
+TEST(PersonTest3, Sample2)
+{
+    MockPerson mock;
+
+    // 첫번째 인자: 5 이상이고 20 미만입니다.   => &&
+    Matcher<int> arg0 = AllOf(Ge(5), Lt(20));
+    // 두번째 인자: 0 미만이거나, 10 초과입니다. => ||
+
+    UsePerson3(&mock);
 }
 
 TEST(PersonTest3, Sample1)
