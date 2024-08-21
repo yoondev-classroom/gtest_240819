@@ -31,7 +31,7 @@ public:
     {
         // ...
         stream->AppendPacket(nullptr);
-        // stream->GetPacket(packetNumber);
+        stream->GetPacket(packetNumber);
     }
 };
 
