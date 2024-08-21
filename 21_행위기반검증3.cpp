@@ -100,5 +100,6 @@ TEST(CalcTest, Process4)
     MockCalc mock;
 
     EXPECT_CALL(mock, Add(10, 20))
-        .WillRepeatedly(Return(1000)); // ?
+        .WillRepeatedly(Return(1000)); // Times(AtLeast(0)) ; 0번 이상
+    // 위의 행위 기반 검증은 실패하지 않습니다.
 }
