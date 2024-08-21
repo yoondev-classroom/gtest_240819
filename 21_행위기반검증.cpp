@@ -90,3 +90,30 @@ TEST(PersonTest2, Sample1)
 
     UsePerson2(&mock);
 }
+
+// 3) 함수 호출 인자
+//  => Matcher
+//    : Hamcrest라는 비교 표현의 확장 라이브러리
+
+using namespace testing;
+
+void UsePerson3(Person* p)
+{
+    p->Go(10, 20);
+    p->Go(10, 20);
+    p->Go(10, 21);
+}
+
+TEST(PersonTest3, Sample1)
+{
+    MockPerson mock;
+
+    // EXPECT_CALL(mock, Go).Times(3);
+
+    // 첫번째 인자는 5 이상이고, 두번째 인자는 20 이어야 합니다.
+    Matcher<int> arg0 = Ge(5);
+    Matcher<int> arg1 = Eq(20);
+    EXPECT_CALL(mock, Go(arg0, arg1)).Times(3);
+
+    UsePerson3(&mock);
+}
