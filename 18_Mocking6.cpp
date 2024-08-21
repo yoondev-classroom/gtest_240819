@@ -57,6 +57,7 @@ public:
     }
 
     // void Send(const char* dir)
+    // - Mock 간략화의 방법입니다.
     MOCK_METHOD(void, Send, (const char* dir));
 };
 
