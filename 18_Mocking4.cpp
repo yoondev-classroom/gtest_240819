@@ -3,6 +3,7 @@
 
 struct Packet { };
 
+// 명시적인 인터페이스
 class IPacketStream {
 public:
     virtual ~IPacketStream() { }
