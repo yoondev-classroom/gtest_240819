@@ -61,7 +61,14 @@ public:
     // => 행위 기반 검증을 수행하고자 하는 메소드에 대해서, MOCK_METHOD를 해야 합니다.
 
     // MOCK_METHOD{인자개수}(메소드 이름, 메소드 타입)
-    MOCK_METHOD2(Write, void(Level level, const std::string& message));
+    //  : 1.10 이전
+    // MOCK_METHOD2(Write, void(Level level, const std::string& message));
+
+    // Google Test 1.10 이후로 MOCK_METHOD 방법이 변경되었습니다.
+    // => MOCK_METHOD(반환타입, 메소드이름, (인자 정보), (한정자 정보));
+
+    // void Write(Level level, const std::string& message) override
+    MOCK_METHOD(void, Write, (Level level, const std::string& message), (override));
 };
 
 // * 주의사항: Google Mock은 Act 하기 전에 EXPECT_CALL 해야 합니다.
