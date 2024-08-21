@@ -96,6 +96,33 @@ TEST(SchedulerTest, Alarm_10_00)
 
 class MockTime : public Time {
 public:
+    // std::string GetCurrentTime() const override
+    MOCK_METHOD(std::string, GetCurrentTime, (), (const, override));
+};
+
+using testing::NiceMock;
+using testing::Return;
+
+TEST(SchedulerTest2, Alarm_00_00)
+{
+    NiceMock<MockTime> clock;
+    ON_CALL(clock, GetCurrentTime).WillByDefault(Return("00:00"));
+    Scheduler scheduler { &clock };
+
+    int result = scheduler.Alarm();
+
+    EXPECT_EQ(result, 42) << "00:00 일때";
+};
+
+TEST(SchedulerTest2, Alarm_10_00)
+{
+    NiceMock<MockTime> clock;
+    ON_CALL(clock, GetCurrentTime).WillByDefault(Return("10:00"));
+    Scheduler scheduler { &clock };
+
+    int result = scheduler.Alarm();
+
+    EXPECT_EQ(result, 100) << "10:00 일때";
 };
 
 #if 0
